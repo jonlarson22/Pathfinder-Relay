@@ -1,5 +1,11 @@
 body { 
-    background-color: #2b0d02; 
+    background: 
+        linear-gradient(rgba(43, 13, 2, 0.7), rgba(43, 13, 2, 0.7)), /* Dark overlay for readability */
+        url('https://www.jpl.nasa.gov/images/pathfinder/images/PIA00001.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
     color: #f4a460; 
     font-family: 'Courier New', Courier, monospace;
     display: flex; 
@@ -56,18 +62,20 @@ body {
 
 .controls {
     display: flex; 
-    gap: 15px;
+    flex-direction: column; /* This stacks the buttons vertically */
+    gap: 10px; /* Space between buttons */
+    width: 250px; /* Gives them a uniform width */
 }
 
 button {
-    padding: 15px 25px;
-    background: #5d2906; 
+    padding: 12px 20px;
+    background: rgba(93, 41, 6, 0.9); /* Slightly transparent */
     color: #f4a460; 
     border: 2px solid #f4a460;
     cursor: pointer; 
     font-family: inherit; 
     font-weight: bold;
-    border-radius: 4px;
+    text-transform: uppercase;
 }
 
 button:disabled { 
