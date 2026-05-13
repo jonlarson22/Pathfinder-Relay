@@ -1,0 +1,82 @@
+body { 
+    background-color: #2b0d02; 
+    color: #f4a460; 
+    font-family: 'Courier New', Courier, monospace;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center;
+    height: 100vh; 
+    margin: 0;
+    overflow: hidden;
+}
+
+#mars-base {
+    position: relative;
+    width: 400px; 
+    height: 400px;
+    background: radial-gradient(circle, #8b4513 0%, #2b0d02 80%);
+    border-radius: 50%;
+    border: 2px solid #5d2906;
+    margin-bottom: 20px;
+}
+
+.hex-char {
+    position: absolute;
+    left: 50%; 
+    top: 50%;
+    width: 30px; 
+    height: 30px;
+    margin-left: -15px; 
+    margin-top: -15px;
+    text-align: center;
+    font-size: 22px; 
+    font-weight: bold;
+}
+
+#rover-anchor {
+    position: absolute;
+    left: 50%; 
+    top: 50%;
+    width: 60px; 
+    height: 60px;
+    margin-left: -30px; 
+    margin-top: -30px;
+    transition: transform 1.2s ease-in-out;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    z-index: 10;
+}
+
+#rover-sprite {
+    font-size: 50px;
+    transform: rotate(-45deg); 
+}
+
+.controls {
+    display: flex; 
+    gap: 15px;
+}
+
+button {
+    padding: 15px 25px;
+    background: #5d2906; 
+    color: #f4a460; 
+    border: 2px solid #f4a460;
+    cursor: pointer; 
+    font-family: inherit; 
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+button:disabled { 
+    opacity: 0.5; 
+    cursor: not-allowed; 
+}
+
+#status {
+    margin-top: 15px;
+    letter-spacing: 2px;
+    height: 20px;
+}
