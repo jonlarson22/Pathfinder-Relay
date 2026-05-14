@@ -9,14 +9,19 @@ hexChars.forEach((char, i) => {
     const el = document.createElement('div');
     el.className = 'hex-char';
     el.innerText = char;
-    el.style.transform = `rotate(${angle}deg) translateY(-170px) rotate(-${angle}deg)`;
+
+    // BULLETPROOF RADIUS: Check screen width at load time
+    // 185px for desktop dial (450px), 130px for mobile dial (320px)
+    const radius = window.innerWidth < 600 ? 130 : 185;
+
+    el.style.transform = `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`;
     ring.appendChild(el);
 });
 
 const messages = {
     msg1: "OTAsIDExMi41LCAyMi41LCA0NSwgNjcuNSwgOTAsIDExMi41", // Original North
     msg2: "MiIuNSwgMjIuNSwgMjIuNSwgMjIuNSwgNDUsIDY3LjUsIDkwLCAxMTIuNQ==", // Original West
-    msg3: "NDUsIDkwLCAxMzUsIDkwLCA0NQ==" // New Placeholder (Points to 2, 4, 6, 4, 2)
+    msg3: "NDUsIDkwLCAxMzUsIDkwLCA0NQ==" // New Placeholder
 };
 
 let currentHeading = 0;
