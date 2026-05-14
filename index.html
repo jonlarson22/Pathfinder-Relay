@@ -8,15 +8,16 @@
 </head>
 <body>
 
+    <!-- NEW: Boot screen to bypass browser audio-blocking -->
+    <div id="boot-screen" onclick="bootSystem()">
+        <p>INCOMING TRANSMISSION...</p>
+        <p class="blink">[ TAP TO INITIALIZE ]</p>
+    </div>
+
     <!-- Empty for the Typewriter effect -->
     <h2 id="sol-title"></h2>
 
-    <!-- Wrap the rest of the UI so we can fade it in after typing -->
     <div id="ui-container">
-        <!-- Bottom Corner Images Only -->
-        <img src="images/astronaut_illustration.png" id="astronaut" class="scene-element corner-scene" alt="Astronaut">
-        <img src="images/rover_illustration.png" id="main-rover" class="scene-element corner-scene" alt="Main Rover">
-
         <div id="mars-base">
             <div id="dial-rim"></div>
             <div id="rover-anchor">
