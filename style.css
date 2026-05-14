@@ -1,60 +1,63 @@
 body { 
-    /* 1. Real photo background */
+    /* FIX: Using relative path for GitHub Pages */
     background: 
-        linear-gradient(rgba(43, 13, 2, 0.4), rgba(43, 13, 2, 0.4)), /* Subtler dark overlay */
-        url('https://github.com/jonlarson22/Pathfinder_Relay/blob/main/images/pathfind_mars_photo.png'); 
+        linear-gradient(rgba(43, 13, 2, 0.4), rgba(43, 13, 2, 0.4)),
+        url('images/pathfind_mars_photo.png'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    background-color: #2b0d02; /* Fallback color */
 
     color: #f4a460; 
     font-family: 'Courier New', Courier, monospace;
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    justify-content: space-between; /* Spread elements out */
-    height: 100vh; 
+    justify-content: space-between; 
+    min-height: 100vh; /* Use min-height so it can grow on mobile */
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden; /* Prevent side-scrolling on mobile */
 }
 
 #sol-title {
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 24px;
+    text-align: center;
     text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    padding: 0 10px;
 }
 
-/* 2. Textured Dial (red dirt and rim) */
 #mars-base {
     position: relative;
-    width: 450px; /* Increased size to feel more substantial */
+    width: 450px; 
     height: 450px;
-    background: 
-        radial-gradient(circle, #a34e2c 10%, #632d16 80%),
-        url('data:image/svg+xml;base64,...(example noise pattern for texture)...'); /* Add noise texture */
-    background-color: #632d16;
+    background: radial-gradient(circle, #a34e2c 10%, #632d16 80%);
     border-radius: 50%;
-    margin-bottom: 20px;
-    box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.7);
-    border: 5px solid #a34e2c; /* Reddirt colored border */
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.7);
+    border: 5px solid #a34e2c;
+    flex-shrink: 0; /* Prevents the dial from squishing */
 }
 
-/* 3. The 0-F ring character plates */
 .hex-char {
     position: absolute;
     left: 50%; 
     top: 50%;
-    width: 36px; /* Slightly larger characters */
-    height: 36px;
-    margin-left: -18px; 
-    margin-top: -18px;
-    text-align: center;
-    font-size: 28px; 
+    width: 38px; 
+    height: 38px;
+    margin-left: -19px; 
+    margin-top: -19px;
+    
+    /* FIX: Perfect vertical/horizontal centering */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-size: 24px; 
     font-weight: bold;
-    color: #ffd8a8; /* Lighter color to pop against dirt */
+    color: #ffd8a8; 
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-    background: rgba(43, 13, 2, 0.6); /* Weathered background plate */
+    background: rgba(43, 13, 2, 0.7); 
     border-radius: 4px;
     border: 1px solid rgba(255, 216, 168, 0.3);
 }
@@ -63,10 +66,10 @@ body {
     position: absolute;
     left: 50%; 
     top: 50%;
-    width: 120px; /* Larger anchor for Pathfinder miniature */
-    height: 120px;
-    margin-left: -60px; 
-    margin-top: -60px;
+    width: 130px;
+    height: 130px;
+    margin-left: -65px; 
+    margin-top: -65px;
     transition: transform 1.2s ease-in-out;
     display: flex; 
     align-items: center; 
@@ -74,75 +77,93 @@ body {
     z-index: 10;
 }
 
-/* 4. Miniature Pathfinder sprite */
 #rover-sprite {
-    width: 100%; /* Fill the anchor area */
-    height: 100%;
-    transform: rotate(0deg); /* No rotation on the sprite itself */
+    width: 100%;
+    height: auto;
 }
 
-/* 5. Scene elements placement */
+/* Scene elements - Made Larger */
 .scene-element {
     position: absolute;
-    height: auto;
-    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.8));
-    z-index: 1; /* Behind the dial and buttons */
+    filter: drop-shadow(0 8px 8px rgba(0,0,0,0.6));
+    z-index: 1;
 }
 
 #habs {
-    top: 15%;
-    left: 5%;
-    width: 250px;
+    top: 10%;
+    left: 2%;
+    width: 320px; /* Increased from 250px */
 }
 
 #astronaut {
-    bottom: 10%;
-    right: 5%;
-    width: 80px;
+    bottom: 5%;
+    right: 3%;
+    width: 120px; /* Increased from 80px */
 }
 
 #main-rover {
-    bottom: 15%;
-    left: 10%;
-    width: 150px;
+    bottom: 5%;
+    left: 5%;
+    width: 220px; /* Increased from 150px */
 }
 
 .controls {
     display: flex; 
     flex-direction: column; 
-    gap: 15px; 
-    width: 300px;
-    margin-bottom: 20px;
+    gap: 12px; 
+    width: 280px;
+    margin-bottom: 10px;
     z-index: 10;
 }
 
 button {
-    padding: 18px 25px; /* Larger, more rugged buttons */
-    background: #3e1b0a; /* Darker, less transparent */
+    padding: 15px; 
+    background: #3e1b0a; 
     color: #f4a460; 
     border: 2px solid #f4a460;
     cursor: pointer; 
     font-family: inherit; 
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 14px;
     border-radius: 4px;
-    transition: all 0.2s ease;
     box-shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
 
-button:hover {
-    background: #5d2906;
-}
-
-button:disabled { 
-    opacity: 0.3; 
-    cursor: not-allowed; 
-}
+button:active { transform: translateY(2px); }
 
 #status {
-    margin-bottom: 30px;
-    font-size: 18px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    text-align: center;
     height: 20px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    font-weight: bold;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 600px) {
+    #mars-base {
+        width: 320px; /* Smaller dial for phones */
+        height: 320px;
+    }
+    
+    .hex-char {
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+    }
+    
+    /* Adjusting the character distance for the smaller circle */
+    /* This script logic handles the rotation, but CSS handles the 'offset' */
+    /* If you find the letters are too far out on mobile, we can adjust the JS */
+
+    .scene-element {
+        opacity: 0.6; /* Fade them slightly so the dial is easier to see */
+    }
+
+    #habs { width: 150px; top: 5%; }
+    #main-rover { width: 120px; bottom: 20%; }
+    #astronaut { width: 60px; bottom: 15%; }
+    
+    #sol-title { font-size: 18px; }
 }
