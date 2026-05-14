@@ -1,52 +1,79 @@
 body { 
-    /* FIX: Using relative path for GitHub Pages */
-    background: 
-        linear-gradient(rgba(43, 13, 2, 0.4), rgba(43, 13, 2, 0.4)),
-        url('images/pathfind_mars_photo.png'); 
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-color: #2b0d02; /* Fallback color */
-
+    margin: 0;
+    padding: 0;
+    background-color: #2b0d02; /* Fallback */
     color: #f4a460; 
     font-family: 'Courier New', Courier, monospace;
     display: flex; 
     flex-direction: column; 
     align-items: center; 
-    justify-content: space-between; 
-    min-height: 100vh; /* Use min-height so it can grow on mobile */
-    margin: 0;
-    overflow-x: hidden; /* Prevent side-scrolling on mobile */
+    justify-content: flex-start; /* Keeps things pulled toward the top */
+    height: 100vh; /* Locks height */
+    width: 100vw;
+    overflow: hidden; /* COMPLETELY PREVENTS SCROLLING */
+    position: relative;
 }
 
+/* FIX: This pseudo-element stops the mobile background resizing glitch */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        linear-gradient(rgba(43, 13, 2, 0.4), rgba(43, 13, 2, 0.4)),
+        url('images/pathfind_mars_photo.png'); 
+    background-size: cover;
+    background-position: center;
+    z-index: -1; /* Puts it behind everything */
+}
+
+/* --- THE BOOT SCREEN --- */
+#boot-screen {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #f4a460;
+}
+
+.blink { animation: blinker 1.2s linear infinite; margin-top: 20px;}
+@keyframes blinker { 50% { opacity: 0; } }
+
 #sol-title {
-    margin-top: 30px; /* Pushed down slightly for balance */
-    font-size: 32px; /* Made bigger! */
+    margin-top: 15px; /* Tighter spacing */
+    margin-bottom: 10px; /* Tighter spacing */
+    font-size: 32px; 
     text-align: center;
     text-transform: uppercase;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
     padding: 0 10px;
-    min-height: 40px; /* Prevents layout shifting while typing */
+    min-height: 40px; 
+    z-index: 10;
 }
 
-/* FADE-IN CONTAINER */
 #ui-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    opacity: 0; /* Hidden initially */
-    transition: opacity 2s ease-in; /* Slow, cinematic fade-in */
+    opacity: 0; 
+    transition: opacity 1.5s ease-in; 
     width: 100%;
 }
+
 #mars-base {
     position: relative;
     width: 450px; 
     height: 450px;
-    /* FIX: Semi-transparent background (30% opacity) */
     background: radial-gradient(circle, rgba(163, 78, 44, 0.3) 10%, rgba(43, 13, 2, 0.5) 80%);
     border-radius: 50%;
-    margin-bottom: 10px;
-    /* Added a glow to the rim to make it pop against the photo */
+    margin-bottom: 15px;
     box-shadow: 0 0 20px rgba(244, 164, 96, 0.4);
     border: 3px solid rgba(244, 164, 96, 0.6);
 }
@@ -59,12 +86,9 @@ body {
     height: 38px;
     margin-left: -19px; 
     margin-top: -19px;
-    
-    /* FIX: Perfect vertical/horizontal centering */
     display: flex;
     align-items: center;
     justify-content: center;
-    
     font-size: 24px; 
     font-weight: bold;
     color: #ffd8a8; 
@@ -74,27 +98,17 @@ body {
     border: 1px solid rgba(255, 216, 168, 0.3);
 }
 
-/* --- Corner Image Positioning --- */
-#habs { top: 5%; left: 2%; width: 280px; }
-#pathfinder-corner { top: 5%; right: 2%; width: 220px; } /* The 4th image */
-#main-rover { bottom: 5%; left: 5%; width: 200px; }
-#astronaut { bottom: 5%; right: 5%; width: 100px; }
-
-/* --- Text Visibility Fix --- */
 #status-container {
-    background: rgba(0, 0, 0, 0.6); /* Dark translucent box */
+    background: rgba(0, 0, 0, 0.6);
     padding: 10px 30px;
     border-radius: 50px;
     border: 1px solid rgba(244, 164, 96, 0.3);
-    margin-bottom: 20px;
-    backdrop-filter: blur(5px); /* Blurs the rocks behind the text */
+    backdrop-filter: blur(5px);
 }
 
 #camera-sprite {
     font-size: 60px;
     filter: drop-shadow(0 0 10px #f4a460);
-    /* In the movie, the camera is a vertical mast, 
-       the 📷 emoji or a custom PNG works great here */
 }
 
 #rover-anchor {
@@ -112,42 +126,12 @@ body {
     z-index: 10;
 }
 
-#rover-sprite {
-    width: 100%;
-    height: auto;
-}
-
-/* Scene elements - Made Larger */
-.scene-element {
-    position: absolute;
-    filter: drop-shadow(0 8px 8px rgba(0,0,0,0.6));
-    z-index: 1;
-}
-
-#habs {
-    top: 10%;
-    left: 2%;
-    width: 320px; /* Increased from 250px */
-}
-
-#astronaut {
-    bottom: 5%;
-    right: 3%;
-    width: 120px; /* Increased from 80px */
-}
-
-#main-rover {
-    bottom: 5%;
-    left: 5%;
-    width: 220px; /* Increased from 150px */
-}
-
 .controls {
     display: flex; 
     flex-direction: column; 
-    gap: 8px; /* Thinner gaps (reduced from 12px) */
+    gap: 8px; 
     width: 280px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     z-index: 10;
 }
 
@@ -175,7 +159,6 @@ button:active { transform: translateY(2px); }
     text-shadow: 0 0 8px rgba(255, 216, 168, 0.8);
 }
 
-/* THE GLOW EFFECT */
 .glow-active {
     animation: character-pulse 0.625s ease-in-out;
 }
@@ -183,40 +166,26 @@ button:active { transform: translateY(2px); }
 @keyframes character-pulse {
     0% { background: rgba(43, 13, 2, 0.7); border-color: rgba(255, 216, 168, 0.3); }
     50% { 
-        background: rgba(163, 78, 44, 0.5); /* Less bright background */
-        border-color: rgba(244, 164, 96, 0.5); /* Dimmer border */
-        box-shadow: 0 0 6px rgba(244, 164, 96, 0.4); /* Smaller, softer halo */
+        background: rgba(163, 78, 44, 0.5); 
+        border-color: rgba(244, 164, 96, 0.5); 
+        box-shadow: 0 0 6px rgba(244, 164, 96, 0.4); 
     }
     100% { background: rgba(43, 13, 2, 0.7); border-color: rgba(255, 216, 168, 0.3); }
 }
 
-    /* --- BLENDING THE CORNER IMAGES --- */
-    .corner-scene {
-        position: absolute;
-        z-index: 1;
-        /* This filter adds a reddish/orange Martian tint and softens the contrast */
-        filter: sepia(0.6) hue-rotate(-15deg) contrast(1.1) brightness(0.8) drop-shadow(0 15px 15px rgba(0,0,0,0.9));
-    }
-    
-    #main-rover { bottom: 2%; left: 2%; width: 200px; }
-    #astronaut { bottom: 2%; right: 2%; width: 100px; }
-
-/* --- MOBILE RESPONSIVENESS (FIXED) --- */
+/* --- MOBILE TIGHTENING --- */
 @media (max-width: 600px) {
-    .scene-element { width: 100px !important; opacity: 0.6; } /* Combined the opacity fix here */
-    #sol-title { font-size: 22px; margin-top: 15px; }
+    #boot-screen { font-size: 18px; }
+    #sol-title { font-size: 20px; margin-top: 15px; margin-bottom: 5px; min-height: 25px; }
     
-    /* Adjusted bottom and sizes for corner images */
-    #main-rover { width: 120px; bottom: 5%; }
-    #astronaut { width: 60px; bottom: 5%; }
-    
-    #mars-base { width: 320px; height: 320px; }
+    #mars-base { width: 310px; height: 310px; margin-bottom: 15px;}
      
-    .hex-char {
-        width: 28px;
-        height: 28px;
-        font-size: 18px;
-    }
-
-    #habs { width: 150px; top: 5%; }
+    .hex-char { width: 26px; height: 26px; font-size: 16px; }
+    #camera-sprite { font-size: 45px; }
+    
+    .controls { gap: 6px; width: 250px; margin-bottom: 10px; }
+    button { padding: 8px; font-size: 12px; }
+    
+    #status-container { padding: 8px 20px; }
+    #status { font-size: 14px; }
 }
