@@ -203,10 +203,13 @@ button:active { transform: translateY(2px); }
 
 /* --- MOBILE RESPONSIVENESS (FIXED) --- */
 @media (max-width: 600px) {
-    .scene-element { width: 100px !important; opacity: 0.4; }
+    .scene-element { width: 100px !important; opacity: 0.6; } /* Combined the opacity fix here */
     #sol-title { font-size: 22px; margin-top: 15px; }
+    
+    /* Adjusted bottom and sizes for corner images */
     #main-rover { width: 120px; bottom: 5%; }
     #astronaut { width: 60px; bottom: 5%; }
+    
     #mars-base { width: 320px; height: 320px; }
      
     .hex-char {
@@ -214,19 +217,6 @@ button:active { transform: translateY(2px); }
         height: 28px;
         font-size: 18px;
     }
-}
-    
-    /* Adjusting the character distance for the smaller circle */
-    /* This script logic handles the rotation, but CSS handles the 'offset' */
-    /* If you find the letters are too far out on mobile, we can adjust the JS */
-
-    .scene-element {
-        opacity: 0.6; /* Fade them slightly so the dial is easier to see */
-    }
 
     #habs { width: 150px; top: 5%; }
-    #main-rover { width: 120px; bottom: 20%; }
-    #astronaut { width: 60px; bottom: 15%; }
-    
-    #sol-title { font-size: 18px; }
 }
