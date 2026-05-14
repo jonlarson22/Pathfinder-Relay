@@ -67,15 +67,36 @@ body::before {
     width: 100%;
 }
 
+/* --- RESPONSIVE DIAL --- */
 #mars-base {
     position: relative;
-    width: 450px; 
-    height: 450px;
+    width: 80vw;   /* Dynamic width based on screen */
+    height: 80vw;  /* Keep it a circle */
+    max-width: 420px; /* Cap it for desktop */
+    max-height: 420px;
     background: radial-gradient(circle, rgba(163, 78, 44, 0.3) 10%, rgba(43, 13, 2, 0.5) 80%);
     border-radius: 50%;
-    margin-bottom: 15px;
+    margin-bottom: 2vh;
     box-shadow: 0 0 20px rgba(244, 164, 96, 0.4);
     border: 3px solid rgba(244, 164, 96, 0.6);
+}
+
+/* THE LANDER IMAGE (Center, non-rotating) */
+#lander-base {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%; /* Relative to the dial size */
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* THE ROTATING CAMERA */
+#camera-sprite {
+    width: 60px; /* Adjust based on your image dimensions */
+    height: auto;
+    filter: drop-shadow(0 0 10px #f4a460);
 }
 
 .hex-char {
@@ -106,19 +127,14 @@ body::before {
     backdrop-filter: blur(5px);
 }
 
-#camera-sprite {
-    font-size: 60px;
-    filter: drop-shadow(0 0 10px #f4a460);
-}
-
 #rover-anchor {
     position: absolute;
     left: 50%; 
     top: 50%;
-    width: 130px;
-    height: 130px;
-    margin-left: -65px; 
-    margin-top: -65px;
+    width: 80px;
+    height: 80px;
+    margin-left: -40px; 
+    margin-top: -40px;
     transition: transform 1.2s ease-in-out;
     display: flex; 
     align-items: center; 
@@ -126,17 +142,17 @@ body::before {
     z-index: 10;
 }
 
+/* Tightening controls */
 .controls {
     display: flex; 
     flex-direction: column; 
-    gap: 8px; 
-    width: 280px;
-    margin-bottom: 15px;
-    z-index: 10;
+    gap: 6px; 
+    width: 260px;
+    margin-bottom: 2vh;
 }
 
 button {
-    padding: 10px; 
+    padding: 8px; 
     background: #3e1b0a; 
     color: #f4a460; 
     border: 2px solid #f4a460;
@@ -144,7 +160,7 @@ button {
     font-family: inherit; 
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 13px;
     border-radius: 4px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.5);
 }
@@ -176,12 +192,12 @@ button:active { transform: translateY(2px); }
 /* --- MOBILE TIGHTENING --- */
 @media (max-width: 600px) {
     #boot-screen { font-size: 18px; }
-    #sol-title { font-size: 20px; margin-top: 15px; margin-bottom: 5px; min-height: 25px; }
+    #sol-title { font-size: 18px; margin-top: 15px; margin-bottom: 5px; min-height: 25px; }
     
-    #mars-base { width: 310px; height: 310px; margin-bottom: 15px;}
+    #mars-base { width: 75vw; height: 75vw; }
      
     .hex-char { width: 26px; height: 26px; font-size: 16px; }
-    #camera-sprite { font-size: 45px; }
+     #camera-sprite { width: 45px; }
     
     .controls { gap: 6px; width: 250px; margin-bottom: 10px; }
     button { padding: 8px; font-size: 12px; }
