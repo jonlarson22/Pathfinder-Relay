@@ -140,7 +140,7 @@ body::before {
     top: 50%;
     width: 20%;
     height: 20%;
-    /* REMOVED FIXED MARGINS HERE */
+    transform: translate(-50%, -50%); /* <-- ADD THIS LINE */
     transition: transform 1.2s ease-in-out;
     display: flex; 
     align-items: center; 
