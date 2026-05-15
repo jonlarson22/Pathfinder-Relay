@@ -105,6 +105,10 @@ body::before {
 
 .hex-char {
     position: absolute;
+    /* ADD THESE TWO LINES TO START AT THE CENTER */
+    top: 50%;
+    left: 50%;
+    
     /* Sizes now scale with the dial */
     width: 6vmin; 
     height: 6vmin;
@@ -136,8 +140,7 @@ body::before {
     top: 50%;
     width: 20%;
     height: 20%;
-    margin-left: -40px; 
-    margin-top: -40px;
+    /* REMOVED FIXED MARGINS HERE */
     transition: transform 1.2s ease-in-out;
     display: flex; 
     align-items: center; 
