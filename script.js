@@ -41,8 +41,8 @@ function createMotor() {
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.type = 'sawtooth';
-    osc.frequency.setValueAtTime(110, audioCtx.currentTime); // Gritty motor pitch
-    gain.gain.setValueAtTime(0.06, audioCtx.currentTime); // Slightly louder since static is gone
+    osc.frequency.setValueAtTime(110, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.02, audioCtx.currentTime); 
     osc.connect(gain);
     gain.connect(audioCtx.destination);
     return osc;
@@ -64,15 +64,28 @@ function stopMotor() {
     }
 }
 
-// INITIALIZE RING
+// DYNAMIC POSITIONING FOR CHARACTERS
+function positionCharacters() {
+    const ring = document.getElementById('ring');
+    const container = document.getElementById('mars-base');
+    const chars = document.querySelectorAll('.hex-char');
+    
+    // Calculate radius: 42% of the container width keeps them safely inside the edge
+    const radius = container.offsetWidth * 0.42; 
+
+    chars.forEach((el, i) => {
+        const angle = i * 22.5; 
+        // We use the calculated radius here
+        el.style.transform = `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`;
+    });
+}
+
+// INITIALIZE
 hexChars.forEach((char, i) => {
-    const angle = i * 22.5; 
     const el = document.createElement('div');
     el.className = 'hex-char';
     el.id = `char-${i}`;
     el.innerText = char;
-    const radius = window.innerWidth < 600 ? 125 : 185;
-    el.style.transform = `rotate(${angle}deg) translateY(-${radius}px) rotate(-${angle}deg)`;
     ring.appendChild(el);
 });
 
@@ -86,7 +99,10 @@ let currentHeading = 0;
 let cumulativeRotation = 0;
 let isPlaying = false;
 
-// --- BOOT SYSTEM (Triggered by clicking the overlay) ---
+// Run positioning on load and if window resizes
+window.addEventListener('load', positionCharacters);
+window.addEventListener('resize', positionCharacters);
+
 function bootSystem() {
     if (audioCtx.state === 'suspended') audioCtx.resume();
     
@@ -104,8 +120,11 @@ function bootSystem() {
             titleEl.innerHTML += titleText.charAt(i);
             playClick(); 
             i++;
-            setTimeout(typeWriter, 120); // SLOWED TO HALF SPEED
+            // SPEED: 90ms is halfway between 60 and 120
+            setTimeout(typeWriter, 90); 
         } else {
+            // Make sure characters are positioned before showing UI
+            positionCharacters();
             setTimeout(() => { uiContainer.style.opacity = 1; }, 500);
         }
     }
