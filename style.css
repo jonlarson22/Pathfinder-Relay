@@ -1,3 +1,8 @@
+/* NEW: Global reset to stop padding from inflating element sizes */
+* {
+    box-sizing: border-box;
+}
+
 body { 
     margin: 0;
     padding: 0;
@@ -47,8 +52,8 @@ body::before {
 @keyframes blinker { 50% { opacity: 0; } }
 
 #sol-title {
-    margin-top: 30px; /* Increased for more top breathing room */
-    margin-bottom: 25px; /* Increased for space before the dial */
+    margin-top: 30px; 
+    margin-bottom: 25px; 
     font-size: 32px; 
     text-align: center;
     text-transform: uppercase;
@@ -56,7 +61,11 @@ body::before {
     padding: 0 10px;
     min-height: 40px; 
     z-index: 10;
-    line-height: 1.3; /* Prevents text from colliding when stacked */
+    line-height: 1.3; 
+    /* FIX: Force long underscored strings to break safely instead of expanding the page width */
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 #ui-container {
@@ -71,9 +80,9 @@ body::before {
 /* --- RESPONSIVE DIAL --- */
 #mars-base {
     position: relative;
-    width: 80vmin; /* Slightly larger base size */   
+    width: 80vmin;    
     height: 80vmin;  
-    max-width: 900px; /* Increased from 650px to let it grow on desktop */
+    max-width: 900px; 
     max-height: 900px;
     background: radial-gradient(circle, rgba(163, 78, 44, 0.3) 10%, rgba(43, 13, 2, 0.5) 80%);
     border-radius: 50%;
@@ -91,7 +100,7 @@ body::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 65%; /* Relative to the dial size */
+    width: 65%; 
     height: auto;
     z-index: 1;
     pointer-events: none;
@@ -101,7 +110,7 @@ body::before {
 
 /* THE ROTATING CAMERA */
 #camera-sprite {
-    width: 75%; /* Drastically shrinks the camera footprint */
+    width: 75%; 
     height: auto;
     filter: drop-shadow(0 0 10px #f4a460);
 }
@@ -110,27 +119,27 @@ body::before {
 #rover-anchor::after {
     content: '';
     position: absolute;
-    bottom: 50%; /* Starts exactly at the center of the camera and grows UP */
+    bottom: 50%; 
     left: 50%;
-    width: 2.5px; /* Thickness of the stick */
-    height: 20vmin; /* Uses vmin so it grows/shrinks perfectly with the ring */
-    max-height: 250px; /* Keeps it from getting too long on giant monitors */
+    width: 2.5px; 
+    height: 20vmin; 
+    max-height: 250px; 
     background: linear-gradient(to right, #888888, #ffffff 30%, #cccccc 70%, #777777);
     transform: translateX(-50%);
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-    z-index: -1; /* Puts the stick underneath the camera graphic */
+    z-index: -1; 
 }
 
 .hex-char {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 8%; /* 8% of the dial width - perfectly scales! */
+    width: 8%; 
     height: 8%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(14px, 2.5vw, 24px); /* Keeps text legible at all sizes */
+    font-size: clamp(14px, 2.5vw, 24px); 
     font-weight: bold;
     color: #ffd8a8; 
     background: rgba(43, 13, 2, 0.8); 
@@ -141,11 +150,11 @@ body::before {
 
 #status-container {
     background: rgba(0, 0, 0, 0.6);
-    padding: 10px 30px;
+    padding: 0 30px; /* Removed vertical padding since flex center handles it */
     border-radius: 50px;
     border: 1px solid rgba(244, 164, 96, 0.3);
     backdrop-filter: blur(5px);
-    height: 60px; 
+    height: 42px;  /* FIX: Drastically scaled down height from 60px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,7 +169,7 @@ body::before {
     top: 50%;
     width: 20%;
     height: 20%;
-    transform: translate(-50%, -50%); /* <-- ADD THIS LINE */
+    transform: translate(-50%, -50%); 
     transition: transform 1.2s ease-in-out;
     display: flex; 
     align-items: center; 
@@ -209,7 +218,7 @@ button:active { transform: translateY(2px); }
 #control-panel {
     display: flex;
     flex-direction: column;
-    align-items: center; /* This forces both child elements to perfectly center */
+    align-items: center; 
     width: 100%;
 }
 
@@ -231,28 +240,27 @@ button:active { transform: translateY(2px); }
     #mars-base { width: 75vw; height: 75vw; }
      
     .hex-char { width: 26px; height: 26px; font-size: 16px; }
-     #camera-sprite { width: 45px; }
+    #camera-sprite { width: 45px; }
     
     .controls { gap: 6px; width: 250px; margin-bottom: 10px; }
     button { padding: 8px; font-size: 12px; }
     
-    #status-container { padding: 8px 20px; }
+    #status-container { height: 38px; padding: 0 20px; } /* Clean scaled mobile height */
     #status { font-size: 14px; }
 }
 
 /* --- DESKTOP WIDE SCREEN LAYOUT --- */
 @media (min-width: 850px) {
     #ui-container {
-        flex-direction: row; /* Puts the dial and the control panel side-by-side */
+        flex-direction: row; 
         justify-content: center;
         align-items: center;
-        gap: 6vw; /* Creates nice breathing room between the dial and buttons */
-        height: 75vh; /* Takes up most of the vertical space */
+        gap: 6vw; 
+        height: 75vh; 
     }
 
     #mars-base {
-        margin-bottom: 0; /* Removes mobile spacing */
-        /* Switch to vh so the dial maximizes its use of the screen height */
+        margin-bottom: 0; 
         width: 75vh; 
         height: 75vh;
     }
@@ -262,6 +270,6 @@ button:active { transform: translateY(2px); }
     }
 
     .controls {
-        margin-bottom: 0; /* Removes mobile spacing */
+        margin-bottom: 0; 
     }
 }
