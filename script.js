@@ -116,7 +116,7 @@ async function bootSystem() {
 
     const titleEl = document.getElementById('sol-title');
     const uiContainer = document.getElementById('ui-container');
-    const titleText = "SOL 97: PATHFINDER_COMMS_RELAY";
+    const titleText = "ARES III MISSON - SOL 97<BR>PATHFINDER_COMMS_RELAY_TEST";
     let i = 0;
 
     function typeWriter() {
