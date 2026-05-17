@@ -3,12 +3,12 @@
   "short_name": "Pathfinder",
   "start_url": "/index.html",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "https://via.placeholder.com/192/5d2906/f4a460?text=🚀",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "images/planet_mars.png",
+      "sizes": "336x336",
+      "type": "image/png"
     }
   ]
 }
