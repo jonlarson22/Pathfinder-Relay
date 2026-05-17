@@ -139,7 +139,7 @@ async function playSequence(type) {
     
     const buttons = document.querySelectorAll('.controls button');
     buttons.forEach(btn => btn.disabled = true);
-    statusText.innerText = `DOWNLINKING<br>TELEMETRY...`;
+    statusText.innerHTML = `DOWNLINKING<br>TELEMETRY...`;
 
     startMotor();
     cumulativeRotation = 0;
@@ -180,7 +180,7 @@ async function playSequence(type) {
         await new Promise(r => setTimeout(r, 1300)); 
     }
     
-    statusText.innerText = "DECOMPRESSION SUCCESSFUL<br>BUFFER LOCKED";
+    statusText.innerHTML = "DECOMPRESSION SUCCESSFUL<br>BUFFER LOCKED";
     isPlaying = false;
     buttons.forEach(btn => btn.disabled = false);
 }
