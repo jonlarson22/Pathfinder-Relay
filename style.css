@@ -291,3 +291,32 @@ button:active { transform: translateY(2px); }
         margin-bottom: 0; 
     }
 }
+
+/* Hide the warning by default */
+#orientation-warning {
+    display: none;
+}
+
+/* Only trigger on mobile screens turned sideways, ignoring desktop monitors */
+@media (orientation: landscape) and (max-width: 900px) {
+    #orientation-warning {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+        color: #f4a460;
+        z-index: 99999; /* Forces it over the boot screen and UI */
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+}
