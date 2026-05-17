@@ -1,6 +1,36 @@
 {
-  "name": "pathfinder-recovery-mission",
-  "description": "A geocaching puzzle based on the Mars Pathfinder communication system.",
-  "repository": "https://github.com/yourusername/your-repo-name",
-  "keywords": ["geocaching", "puzzle", "mars", "pathfinder"]
+  "name": "Pathfinder",
+  "slug": "pathfinder-telemetry-override",
+  "version": "1.0.0",
+  "description": "NASA Ares III Pathfinder Telemetry Control Interface",
+  "orientation": "portrait",
+  "icon": "./images/planet_mars.png",
+  "splash": {
+    "image": "./images/planet_mars.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#000000"
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "gc.nasa.ares3.pathfinder",
+    "infoPlist": {
+      "UISupportedInterfaceOrientations": [
+        "UIInterfaceOrientationPortrait"
+      ]
+    }
+  },
+  "android": {
+    "package": "gc.nasa.ares3.pathfinder",
+    "versionCode": 1,
+    "adaptiveIcon": {
+      "foregroundImage": "./images/planet_mars.png",
+      "backgroundColor": "#000000"
+    }
+  }
 }
