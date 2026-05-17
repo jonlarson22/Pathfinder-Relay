@@ -260,18 +260,21 @@ button:active { transform: translateY(2px); }
 /* --- DESKTOP WIDE SCREEN LAYOUT --- */
 @media (min-width: 900px) {
     #ui-container {
-        flex-direction: row; 
-        justify-content: center;
+        /* 1. Use Grid to create two strict, equal-width halves */
+        display: grid;
+        grid-template-columns: 1fr 1fr; 
         align-items: center;
-        gap: 6vw; 
-        height: 75vh; 
+        justify-items: center; /* 2. Centers the dial and controls perfectly within their own halves */
+        width: 100vw;
+        height: 75vh;
+        /* No gap needed here; the grid handles the spacing naturally */
     }
 
     #mars-base {
         margin-bottom: 0; 
-        /* UPDATE THESE TWO LINES: Dynamically limits size based on available screen width */
-        width: clamp(300px, 75vh, calc(100vw - 350px));
-        height: clamp(300px, 75vh, calc(100vw - 350px));
+        /* 3. Updated max-width constraint to 45vw so it never overlaps the right column */
+        width: clamp(300px, 75vh, 45vw);
+        height: clamp(300px, 75vh, 45vw);
     }
 
     #control-panel {
