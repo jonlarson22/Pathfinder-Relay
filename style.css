@@ -78,10 +78,12 @@ body::before {
 /* --- RESPONSIVE DIAL --- */
 #mars-base {
     position: relative;
-    width: 80vmin;    
-    height: 80vmin;  
-    max-width: 900px; 
+    width: 80vmin;
+    height: 80vmin;
+    max-width: 900px;
     max-height: 900px;
+    aspect-ratio: 1 / 1; /* <-- ADD THIS: Forces a perfect circle */
+    flex-shrink: 0;      /* <-- ADD THIS: Stops flexbox from squishing it */
     background: radial-gradient(circle, rgba(163, 78, 44, 0.3) 10%, rgba(43, 13, 2, 0.5) 80%);
     border-radius: 50%;
     margin-bottom: 2vh;
@@ -256,7 +258,7 @@ button:active { transform: translateY(2px); }
 }
 
 /* --- DESKTOP WIDE SCREEN LAYOUT --- */
-@media (min-width: 850px) {
+@media (min-width: 900px) {
     #ui-container {
         flex-direction: row; 
         justify-content: center;
@@ -267,8 +269,9 @@ button:active { transform: translateY(2px); }
 
     #mars-base {
         margin-bottom: 0; 
-        width: 75vh; 
-        height: 75vh;
+        /* UPDATE THESE TWO LINES: Dynamically limits size based on available screen width */
+        width: clamp(300px, 75vh, calc(100vw - 350px));
+        height: clamp(300px, 75vh, calc(100vw - 350px));
     }
 
     #control-panel {
