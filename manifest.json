@@ -1,10 +1,9 @@
 {
+  "name": "Pathfinder Telemetry Override",
   "short_name": "Pathfinder",
-  "name": "Pathfinder Signal Station",
-  "start_url": "./index.html",
+  "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#2b0d02",
-  "theme_color": "#2b0d02",
+  "orientation": "portrait"
   "icons": [
     {
       "src": "https://via.placeholder.com/192/5d2906/f4a460?text=🚀",
