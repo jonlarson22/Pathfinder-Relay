@@ -148,9 +148,24 @@ async function playSequence(type) {
     rover.style.transform = `translate(-50%, -50%) rotate(0deg)`; 
     
     await new Promise(r => setTimeout(r, 1200));
-    stopMotor(); 
-    
-    const sequence = atob(messages[type]).split(',').map(num => parseFloat(num.trim()));
+    stopMotor();
+
+    let sequence;
+    try {
+        sequence = atob(messages[type]).split(',').map(num => {
+            const n = parseFloat(num.trim());
+            if (Number.isNaN(n)) throw new Error(`bad angle value: "${num.trim()}"`);
+            return n;
+        });
+        if (!sequence.length) throw new Error("empty data block");
+    } catch (err) {
+        stopMotor();
+        console.error("playSequence decode error:", err);
+        statusText.innerHTML = "DOWNLINK FAILED<br>CHECK DATA BLOCK";
+        isPlaying = false;
+        buttons.forEach(btn => btn.disabled = false);
+        return;
+    }
     
     for (let target of sequence) {
         await new Promise(r => setTimeout(r, 200)); 
