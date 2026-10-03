@@ -25,7 +25,7 @@ body::before {
     top: 0; left: 0; right: 0; bottom: 0;
     background: 
         linear-gradient(rgba(43, 13, 2, 0.4), rgba(43, 13, 2, 0.4)),
-        url('images/pathfind_mars_photo.png'); 
+        url('images/pathfind_mars_photo.jpg'); 
     background-size: cover;
     background-position: center;
     z-index: -1; 
